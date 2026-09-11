@@ -4,7 +4,7 @@
 
 This is a Pico-8 emulator for Picotron, intended to run Pico-8 cartridges from the new workstation Picotron.
 
-## Using
+## Using the emulator
 
 The (what should be) stable build of the emulator will be found on the [Lexaloffle BBS](https://www.lexaloffle.com/bbs/?tid=153649) and can be used to download it, either from `splore`, the online web bbs, or with `load #p8_emulator -u`.
 

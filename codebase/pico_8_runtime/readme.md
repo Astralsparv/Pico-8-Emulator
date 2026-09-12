@@ -33,19 +33,37 @@ The length of the code, for the print in the terminal with:
 ```
 (should be able to just delete to save memory once all actions related are done)
 
-### mem (table)
-The memory of the Pico-8 environments for where it can't be passed through to Picotron. This will likely be changed to a `u8` userdata in the future but would technically be more memory efficient as a table. Pico-8 memory operations on userdata will likely be faster though.
+### mem (userdata u8)
+A 0x8000 userdata, being Pico-8's userdata.
 
-The userdata size would be allocated 8000 bytes (though most passthrough to Picotron)
+Will need expanding to the full memory of Pico-8.
+
+Memory is handled by `/core/memory.lua` and `/core/p8functs/memory.lua` and memory status is:
+```
+0x0     0x0fff  Sprite sheet (0-127)*                                   [IMPLEMENTED]
+0x1000  0x1fff  Sprite sheet (128-255)* / Map (rows 32-63) (shared)     [IMPLEMENTED]
+0x2000  0x2fff  Map (rows 0-31)                                         [IMPLEMENTED]
+0x3000  0x30ff  Sprite flags                                            [IMPLEMENTED]
+0x3100  0x31ff  Music                                               
+0x3200  0x42ff  Sound effects                                           [IMPLEMENTED]
+0x4300  0x55ff  General use (or work RAM)                               [IMPLEMENTED]
+0x5600  0x5dff  General use / custom font (0.2.2+)                      [IMPLEMENTED]
+0x5e00  0x5eff  Persistent cart data (64 numbers = 256 bytes)           [IMPLEMENTED]
+0x5f00  0x5f3f  Draw state                                                           
+0x5f40  0x5f7f  Hardware state                                      
+0x5f80  0x5fff  GPIO pins (128 bytes)                               
+0x6000  0x7fff  Screen data (8k)*                                       [IMPLEMENTED]
+0x8000  0xffff  General use / extended sprite sheets / extended map 
+```
 
 ### active (bool)
 Whether the cartridge is actively running or not.
 
 ### spritesheet (userdata u8)
-A 128x128 userdata defining the loaded spritesheet. This mixes in with memory peeking/poking **(but is barely implemented!)** and is also `set_spr()`'d for `map()` optimisations (using Picotron's C map function for speed, may be improved with sprite batching but still requires `set_spr`).
+A 128x128 userdata defining the loaded spritesheet.
 
 ### mapsheet (userdata i16)
-A 128x64 userdata defining the mapsheet. Memory operations related to this are **not** implemented in any state.
+A 128x64 userdata defining the mapsheet.
 
 ### spriteflags (userdata u8)
 A 256x1 userdata defining the spriteflags. These are also `fset()`'d for optimisations for `map()` as it uses Picotron's C map function for speed.

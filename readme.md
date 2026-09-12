@@ -20,7 +20,7 @@ If zep/lexaloffle approves of these being packaged with the emulator, they will,
 
 `hello` - seems to work, music seems off
 
-`automata` - defunct. memcpy() stuff doesn't work
+`automata` - semi-functional. memcpy() needs fixing
 
 `bounce` - seems fully functional
 
@@ -32,7 +32,7 @@ If zep/lexaloffle approves of these being packaged with the emulator, they will,
 
 `drippy` - seems fully functional
 
-`jelpi` - defunct. reset() needs proper implementation
+`jelpi` - lua error
 
 `sort` - seems fully functional
 
